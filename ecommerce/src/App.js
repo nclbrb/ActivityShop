@@ -24,7 +24,6 @@ class App extends Component {
       }));
     }
 
-    alert(`${product.name} was added to the cart!`);
   };
 
   updateQuantity = (id, newQuantity) => {
