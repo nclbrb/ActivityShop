@@ -31,6 +31,8 @@ class ProductList extends Component {
     );
 
     return (
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <h1 style={{ marginBottom: '-15px', fontFamily: 'Outfit' }}>Bulgatton Clothing</h1>
       <div style={{ textAlign: 'center', padding: '20px' }}>
         <h2 style={{ marginBottom: '15px', fontSize: '20px', fontFamily: 'Outfit' }}>
           Product List
@@ -71,12 +73,15 @@ class ProductList extends Component {
                 }}
               >Add to Cart
               </button>
+              
             </div>
           ))}
+          </div>
         </div>
       </div>
     );
   }
+  
 }
 
 export default ProductList;
