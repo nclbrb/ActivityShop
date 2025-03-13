@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
+import ClearCartButton from './components/ClearCartButton';  
 
 class App extends Component {
   state = {
@@ -23,7 +24,6 @@ class App extends Component {
         cart: [...prevState.cart, { ...product, quantity: 1 }]
       }));
     }
-
   };
 
   updateQuantity = (id, newQuantity) => {
@@ -40,6 +40,10 @@ class App extends Component {
     }));
   };
 
+  clearCart = () => {
+    this.setState({ cart: [] });
+  };
+
   calculateTotal = () => {
     return this.state.cart.reduce((total, product) => total + product.price * product.quantity, 0);
   };
@@ -47,15 +51,18 @@ class App extends Component {
   render() {
     return (
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <h1 style={{marginBottom: '-15px', fontFamily: 'Outfit'}}>Bulgatton Clothing</h1>
+        <h1 style={{ marginBottom: '-15px', fontFamily: 'Outfit' }}>Bulgatton Clothing</h1>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <ProductList addToCart={this.addToCart} />
-          <Cart 
-            cart={this.state.cart} 
-            total={this.calculateTotal()} 
-            updateQuantity={this.updateQuantity} 
+          <Cart
+            cart={this.state.cart}
+            total={this.calculateTotal()}
+            updateQuantity={this.updateQuantity}
             removeFromCart={this.removeFromCart}
           />
+          
+        
+          <ClearCartButton clearCart={this.clearCart} />  
         </div>
       </div>
     );
