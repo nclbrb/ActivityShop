@@ -24,7 +24,6 @@ class App extends Component {
       }));
     }
 
-    alert(`${product.name} was added to the cart!`);
   };
 
   updateQuantity = (id, newQuantity) => {
@@ -48,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <h1>Bulgatton Clothing</h1>
+        <h1 style={{marginBottom: '-15px', fontFamily: 'Outfit'}}>Bulgatton Clothing</h1>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <ProductList addToCart={this.addToCart} />
           <Cart 

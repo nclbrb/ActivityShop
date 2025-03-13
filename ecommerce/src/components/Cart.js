@@ -2,17 +2,16 @@ import React from 'react';
 
 const Cart = ({ cart, total, updateQuantity, removeFromCart }) => (
   <div style={{ 
-    marginTop: '20px',
+    marginTop: '-5px',
     textAlign: 'center',
-    width: '60%',  // Full-width design
-    maxWidth: '60%',  // Ensures maximum expansion
+    width: '60%',
+    maxWidth: '60%',
     marginLeft: 'auto',
     marginRight: 'auto',
     border: '1px solid #ddd',
-    borderRadius: '12px',
-    padding: '20px',
-    boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
-    backgroundColor: '#f9f9f9'
+    borderRadius: '4px',
+    padding: '15px',
+    fontFamily: 'Outfit'
   }}> 
     <h2>Shopping Cart</h2>
     {cart.length === 0 ? (
@@ -26,13 +25,17 @@ const Cart = ({ cart, total, updateQuantity, removeFromCart }) => (
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              padding: '15px 40px',  // Wider spacing for a larger layout
-              borderBottom: '1px solid #ddd'
+              padding: '10px 20px',
+              marginTop: '-10px',
+              marginBottom: '-10px',
+              borderBottom: '1px solid #ddd',
+              fontFamily: 'Outfit'
             }}
           >
-            <p style={{ flex: 1, textAlign: 'left', fontWeight: 'bold' }}>
-              {item.name} - ₱{item.price * item.quantity}
-            </p>
+           <p style={{ flex: 1, textAlign: 'left' }}>
+          {item.name} - <span style={{ fontWeight: 'bold' }}>₱{item.price * item.quantity}</span>
+          </p>
+
             <div>
               <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity === 1}>-</button>
               <span style={{ margin: '0 15px' }}>{item.quantity}</span>
@@ -40,10 +43,15 @@ const Cart = ({ cart, total, updateQuantity, removeFromCart }) => (
               <button 
                 onClick={() => removeFromCart(item.id)}
                 style={{
-                  marginLeft: '15px',
+                  padding: '5px 10px',
                   backgroundColor: '#ff4d4d',
                   color: '#fff',
-                  borderRadius: '4px'
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  marginLeft: '15px',
+                  marginBottom: '-20px',
+                  fontFamily: 'Outfit'
                 }}
               >
                 Remove

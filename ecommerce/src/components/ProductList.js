@@ -6,6 +6,7 @@ import leather from '../images/leather.jpg';
 
 class ProductList extends Component {
   state = {
+    searchQuery: '',
     products: [
       { id: 1, name: 'Black T-Shirt', price: 1000, image: black },
       { id: 2, name: 'White T-Shirt', price: 1500, image: white },
@@ -14,17 +15,60 @@ class ProductList extends Component {
     ]
   };
 
+  handleSearch = (e) => {
+    this.setState({ searchQuery: e.target.value });
+  };
+
   render() {
+    const filteredProducts = this.state.products.filter(product =>
+      product.name.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+    );
+
     return (
-      <div style={{ textAlign: 'center' }}>
-        <h2>Product List</h2>
+      <div style={{ textAlign: 'center', padding: '20px' }}>
+        <h2 style={{ marginBottom: '15px', fontSize: '20px', fontFamily: 'Outfit' }}>Product List</h2>
+        {/* Search Input */}
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={this.state.searchQuery}
+          onChange={this.handleSearch}
+          style={{ marginBottom: '15px', padding: '8px', width: '300px', fontSize: '14px', fontFamily: 'Outfit', borderRadius: '10px' }}
+        />
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
-          {this.state.products.map((product) => (
-            <div key={product.id} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '5px' }}>
-              <img src={product.image} alt={product.name} style={{ width: '200px', height: '230px' }} />
-              <h3>{product.name}</h3>
-              <p>₱{product.price}</p>
-              <button onClick={() => this.props.addToCart(product)}>Add to Cart</button>
+          {filteredProducts.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                border: '1px solid #ddd',
+                padding: '10px',
+                borderRadius: '5px',
+                marginBottom: '10px',
+                fontFamily: 'Outfit'
+              }}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{ width: '200px', height: '230px', objectFit: 'cover' }}
+              />
+              <h3 style={{ margin: '5px 0', fontSize: '16px', fontFamily: 'Outfit' }}>{product.name}</h3>
+              <p style={{ margin: '5px 0', fontSize: '14px', fontFamily: 'Outfit' }}>₱{product.price}</p>
+              <button
+                onClick={() => this.props.addToCart(product)}
+                style={{
+                  padding: '5px 10px',
+                  fontSize: '14px',
+                  backgroundColor: '#28a745',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontFamily: 'Outfit'
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           ))}
         </div>
