@@ -7,13 +7,19 @@ import leather from '../images/leather.jpg';
 class ProductList extends Component {
   state = {
     searchQuery: '',
-    products: [
+    products: []
+  };
+
+  // Simulate fetching data on mount
+  componentDidMount() {
+    const simulatedProducts = [
       { id: 1, name: 'Black T-Shirt', price: 1000, image: black },
       { id: 2, name: 'White T-Shirt', price: 1500, image: white },
       { id: 3, name: 'Denim', price: 2000, image: denim },
       { id: 4, name: 'Leather', price: 3000, image: leather }
-    ]
-  };
+    ];
+    this.setState({ products: simulatedProducts });
+  }
 
   handleSearch = (e) => {
     this.setState({ searchQuery: e.target.value });
@@ -27,13 +33,12 @@ class ProductList extends Component {
     return (
       <div style={{ textAlign: 'center', padding: '20px' }}>
         <h2 style={{ marginBottom: '15px', fontSize: '20px', fontFamily: 'Outfit' }}>Product List</h2>
-        {/* Search Input */}
         <input
           type="text"
           placeholder="Search products..."
           value={this.state.searchQuery}
           onChange={this.handleSearch}
-          style={{ marginBottom: '15px', padding: '8px', width: '300px', fontSize: '14px', fontFamily: 'Outfit', borderRadius: '10px' }}
+          style={{ marginBottom: '15px', padding: '8px', width: '300px', borderRadius: '10px' }}
         />
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
           {filteredProducts.map((product) => (
@@ -43,32 +48,17 @@ class ProductList extends Component {
                 border: '1px solid #ddd',
                 padding: '10px',
                 borderRadius: '5px',
-                marginBottom: '10px',
-                fontFamily: 'Outfit'
+                marginBottom: '10px'
               }}
             >
               <img
                 src={product.image}
                 alt={product.name}
-                style={{ width: '200px', height: '230px', objectFit: 'cover' }}
+                style={{ width: '200px', height: '230px' }}
               />
-              <h3 style={{ margin: '5px 0', fontSize: '16px', fontFamily: 'Outfit' }}>{product.name}</h3>
-              <p style={{ margin: '5px 0', fontSize: '14px', fontFamily: 'Outfit' }}>₱{product.price}</p>
-              <button
-                onClick={() => this.props.addToCart(product)}
-                style={{
-                  padding: '5px 10px',
-                  fontSize: '14px',
-                  backgroundColor: '#28a745',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  fontFamily: 'Outfit'
-                }}
-              >
-                Add to Cart
-              </button>
+              <h3>{product.name}</h3>
+              <p>₱{product.price}</p>
+              <button onClick={() => this.props.addToCart(product)}>Add to Cart</button>
             </div>
           ))}
         </div>

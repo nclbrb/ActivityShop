@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
-import ClearCartButton from './components/ClearCartButton';  
+import ClearCartButton from './components/ClearCartButton';
 
 class App extends Component {
   state = {
-    cart: []
+    cart: [],
+    total: 0
   };
+
+  componentDidMount() {
+    this.calculateTotal();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cart !== this.state.cart) {
+      this.calculateTotal();
+    }
+  }
 
   addToCart = (product) => {
     const existingItem = this.state.cart.find((item) => item.id === product.id);
@@ -45,7 +56,11 @@ class App extends Component {
   };
 
   calculateTotal = () => {
-    return this.state.cart.reduce((total, product) => total + product.price * product.quantity, 0);
+    const total = this.state.cart.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+    this.setState({ total });
   };
 
   render() {
@@ -56,13 +71,11 @@ class App extends Component {
           <ProductList addToCart={this.addToCart} />
           <Cart
             cart={this.state.cart}
-            total={this.calculateTotal()}
+            total={this.state.total}
             updateQuantity={this.updateQuantity}
             removeFromCart={this.removeFromCart}
           />
-          
-        
-          <ClearCartButton clearCart={this.clearCart} />  
+          <ClearCartButton clearCart={this.clearCart} />
         </div>
       </div>
     );
