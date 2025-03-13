@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
+import black from './images/black.jpg';
+import white from './images/white.jpg';
+import denim from './images/denim.jpg';
+import leather from './images/leather.jpg';
 
 const products = [
-  { id: 1, name: 'Black T-Shirt', price: 1000 },
-  { id: 2, name: 'White T-Shirt', price: 1500 },
-  { id: 3, name: 'Denim', price: 2000 },
-  { id: 4, name: 'Leather', price: 3000 }
+  { id: 1, name: 'Black T-Shirt', price: 1000, image: black },
+  { id: 2, name: 'White T-Shirt', price: 1500, image: white },
+  { id: 3, name: 'Denim', price: 2000, image: denim },
+  { id: 4, name: 'Leather', price: 3000, image: leather }
 ];
 
 class App extends Component {
@@ -36,7 +40,7 @@ class App extends Component {
   };
 
   handleUpdateQuantity = (id, newQuantity) => {
-    if (newQuantity < 1) return; // Prevent quantity from going below 1
+    if (newQuantity < 1) return;
     this.setState((prevState) => ({
       cart: prevState.cart.map((item) =>
         item.id === id ? { ...item, quantity: newQuantity } : item

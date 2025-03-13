@@ -1,4 +1,3 @@
-// components/SearchBar.js
 import React from 'react';
 
 const SearchBar = ({ searchQuery, onSearchChange }) => {
@@ -6,7 +5,7 @@ const SearchBar = ({ searchQuery, onSearchChange }) => {
     <input
       type="text"
       placeholder="Search products..."
-      value={searchQuery} // searchQuery is used here
+      value={searchQuery}
       onChange={onSearchChange}
       style={{
         marginBottom: '15px',
