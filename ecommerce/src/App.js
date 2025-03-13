@@ -1,81 +1,62 @@
 import React, { Component } from 'react';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
-import ClearCartButton from './components/ClearCartButton';
+
+const products = [
+  { id: 1, name: 'Black T-Shirt', price: 1000 },
+  { id: 2, name: 'White T-Shirt', price: 1500 },
+  { id: 3, name: 'Denim', price: 2000 },
+  { id: 4, name: 'Leather', price: 3000 }
+];
 
 class App extends Component {
   state = {
+    products: [],
     cart: [],
-    total: 0
   };
 
   componentDidMount() {
-    this.calculateTotal();
+    this.setState({ products });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.cart !== this.state.cart) {
-      this.calculateTotal();
-    }
-  }
-
-  addToCart = (product) => {
-    const existingItem = this.state.cart.find((item) => item.id === product.id);
-
+  handleAddToCart = (product) => {
+    const { cart } = this.state;
+    const existingItem = cart.find((item) => item.id === product.id);
     if (existingItem) {
-      this.setState((prevState) => ({
-        cart: prevState.cart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      }));
+      this.setState({
+        cart: cart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        ),
+      });
     } else {
-      this.setState((prevState) => ({
-        cart: [...prevState.cart, { ...product, quantity: 1 }]
-      }));
+      this.setState({
+        cart: [...cart, { ...product, quantity: 1 }],
+      });
     }
   };
 
-  updateQuantity = (id, newQuantity) => {
+  handleRemoveItem = (id) => {
     this.setState((prevState) => ({
-      cart: prevState.cart.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
+      cart: prevState.cart.filter((item) => item.id !== id),
     }));
   };
 
-  removeFromCart = (id) => {
-    this.setState((prevState) => ({
-      cart: prevState.cart.filter((item) => item.id !== id)
-    }));
-  };
-
-  clearCart = () => {
+  handleClearCart = () => {
     this.setState({ cart: [] });
   };
 
-  calculateTotal = () => {
-    const total = this.state.cart.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
-    );
-    this.setState({ total });
-  };
-
   render() {
+    const { products, cart } = this.state;
     return (
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <h1 style={{ marginBottom: '-15px', fontFamily: 'Outfit' }}>Bulgatton Clothing</h1>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <ProductList addToCart={this.addToCart} />
-          <Cart
-            cart={this.state.cart}
-            total={this.state.total}
-            updateQuantity={this.updateQuantity}
-            removeFromCart={this.removeFromCart}
+          <ProductList products={products} addToCart={this.handleAddToCart} />
+          <Cart 
+            cart={cart} 
+            onRemoveItem={this.handleRemoveItem} 
+            onClearCart={this.handleClearCart} 
           />
-          <ClearCartButton clearCart={this.clearCart} />
         </div>
       </div>
     );
