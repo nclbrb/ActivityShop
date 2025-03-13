@@ -35,6 +35,15 @@ class App extends Component {
     }
   };
 
+  handleUpdateQuantity = (id, newQuantity) => {
+    if (newQuantity < 1) return; // Prevent quantity from going below 1
+    this.setState((prevState) => ({
+      cart: prevState.cart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    }));
+  };
+
   handleRemoveItem = (id) => {
     this.setState((prevState) => ({
       cart: prevState.cart.filter((item) => item.id !== id),
@@ -48,16 +57,14 @@ class App extends Component {
   render() {
     const { products, cart } = this.state;
     return (
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <h1 style={{ marginBottom: '-15px', fontFamily: 'Outfit' }}>Bulgatton Clothing</h1>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <ProductList products={products} addToCart={this.handleAddToCart} />
-          <Cart 
-            cart={cart} 
-            onRemoveItem={this.handleRemoveItem} 
-            onClearCart={this.handleClearCart} 
-          />
-        </div>
+      <div className="app">
+        <ProductList products={products} addToCart={this.handleAddToCart} />
+        <Cart 
+          cart={cart} 
+          onRemoveItem={this.handleRemoveItem} 
+          onClearCart={this.handleClearCart}
+          updateQuantity={this.handleUpdateQuantity}
+        />
       </div>
     );
   }
