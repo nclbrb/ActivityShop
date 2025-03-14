@@ -1,38 +1,135 @@
-.App {
+.app {
+  font-family: 'Outfit', sans-serif;
+}
+
+.add-to-cart-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+
+.cart-container {
+  margin-top: -5px;
   text-align: center;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  font-family: 'Outfit', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cart-item {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Outfit', sans-serif;
+}
+
+.cart-item-info {
+  flex: 1;
+  text-align: left;
+}
+
+.cart-item-quantity {
+  margin: 0 15px;
+}
+
+.cart-total {
+  text-align: right;
+  margin-right: 40px;
+}
+
+.clear-cart-button {
+  padding: 10px 20px;
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  margin-top: 15px;
+}
+
+.product-list-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.brand-title {
+  margin-bottom: -15px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.product-list-wrapper {
+  text-align: center;
+  padding: 20px;
+}
+
+.product-list-heading {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.search-bar {
+  margin-bottom: 15px;
+  padding: 8px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.products-wrapper {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+.product-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.product-image {
+  width: 200px;
+  height: 230px;
+  object-fit: cover;
+}
+
+.product-name {
+  margin: 5px 0;
+  font-size: 16px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.product-price {
+  margin: 5px 0;
+  font-size: 14px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.remove-from-cart-button {
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 15px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.bold {
+  font-weight: bold;
 }

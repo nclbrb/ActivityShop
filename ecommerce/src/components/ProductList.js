@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import SearchBar from './SearchBar'; 
+import SearchBar from './SearchBar';
+import AddToCartButton from './AddToCartButton';
+import '../App.css';
 
 class ProductList extends Component {
   state = {
@@ -19,49 +21,21 @@ class ProductList extends Component {
     );
 
     return (
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <h1 style={{ marginBottom: '-15px', fontFamily: 'Outfit' }}>Bulgatton Clothing</h1>
-        <div style={{ textAlign: 'center', padding: '20px' }}>
-          <h2 style={{ marginBottom: '15px', fontSize: '20px', fontFamily: 'Outfit' }}>
-            Product List
-          </h2>
+      <div className="product-list-container">
+        <h1 className="brand-title">Bulgatton Clothing</h1>
+        <div className="product-list-wrapper">
+          <h2 className="product-list-heading">Product List</h2>
           <SearchBar 
             searchQuery={searchQuery} 
             onSearchChange={this.handleSearch}
           />
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <div className="products-wrapper">
             {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                style={{
-                  border: '1px solid #ddd',
-                  padding: '10px',
-                  borderRadius: '5px',
-                  marginBottom: '10px'
-                }}
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={{ width: '200px', height: '230px', objectFit: 'cover' }}
-                />
-                <h3 style={{ margin: '5px 0', fontSize: '16px', fontFamily: 'Outfit' }}>{product.name}</h3>
-                <p style={{ margin: '5px 0', fontSize: '14px', fontFamily: 'Outfit' }}>₱{product.price}</p>
-                <button
-                  onClick={() => addToCart(product)}
-                  style={{
-                    padding: '5px 10px',
-                    fontSize: '14px',
-                    backgroundColor: '#28a745',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontFamily: 'Outfit'
-                  }}
-                >
-                  Add to Cart
-                </button>
+              <div key={product.id} className="product-item">
+                <img src={product.image} alt={product.name} className="product-image" />
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-price">₱{product.price}</p>
+                <AddToCartButton product={product} onAddToCart={addToCart} />
               </div>
             ))}
           </div>
