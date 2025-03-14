@@ -5,6 +5,7 @@ import black from './images/black.jpg';
 import white from './images/white.jpg';
 import denim from './images/denim.jpg';
 import leather from './images/leather.jpg';
+import './App.css';
 
 const products = [
   { id: 1, name: 'Black T-Shirt', price: 1000, image: black },
